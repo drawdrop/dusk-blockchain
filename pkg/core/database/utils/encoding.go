@@ -102,12 +102,12 @@ func DecodeBlockTx(data []byte, typeFilter transactions.TxType) (transactions.Co
 	}
 
 	if e := transactions.Unmarshal(reader, tx); e != nil {
-		return tx, txIndex, err
+		return tx, txIndex, e
 	}
 
 	var buferr []byte
 	if e := encoding.ReadVarBytesUint32LE(reader, &buferr); e != nil {
-		return tx, txIndex, err
+		return tx, txIndex, e
 	}
 
 	if len(buferr) > 0 {
